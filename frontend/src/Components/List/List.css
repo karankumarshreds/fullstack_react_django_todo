@@ -1,0 +1,19 @@
+.Task {
+    background-color: rgb(255, 196, 0);
+    padding: 0rem 0.8rem;
+    box-shadow:  3px 5px 6px -5px rgba(0,0,0,0.56);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    border-radius: 1rem;
+    margin-top: 1rem;
+}
+
+.Icons {
+    cursor: pointer;
+    color: steelblue;
+    display: flex;
+    justify-content: space-evenly;
+    width: 50px;
+}

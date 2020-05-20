@@ -8,6 +8,8 @@ import './Main.css'
 class Main extends Component {
     state = {
         tasks: [
+            {title: '', completed: false}
+
         ]
       };
     
@@ -23,6 +25,21 @@ class Main extends Component {
                 tasks: [...state.tasks, data]
             }
         })
+    }
+
+    taskUpdater = (title, id) => {
+        let newList = this.state.tasks.map((el) => {
+            if (el.id === id) {
+                return {
+                    ...el, title: title
+                }
+            } else {
+                return el;
+            } 
+        });
+        
+        this.setState({tasks: newList});
+        console.log(newList);
     }
 
     deleteHandler = (id) => {
@@ -72,6 +89,7 @@ class Main extends Component {
                                         id={each.id}
                                         CSRFToken={CSRFToken}
                                         delete={this.deleteHandler}
+                                        taskUpdater={this.taskUpdater}
                                     />
                                 )
                             })}

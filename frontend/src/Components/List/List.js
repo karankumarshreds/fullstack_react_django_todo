@@ -5,15 +5,19 @@ import axios from 'axios'
 class List extends Component {
 
     state = {
-        task: [
-            {task: '', completed: false, id: null}
-        ]
+            task: {
+                title: this.props.title, 
+                completed: false, 
+                id: ''
+            }, 
+            editing: false
     }
-
 
     EditHandler = (event) => {
         alert('Edit?')
+        this.setState({editing: true})
     }
+
     DeleteHandler = (event) => {
         // http://localhost:8000/api/task-delete/
         axios({
@@ -24,10 +28,51 @@ class List extends Component {
         this.props.delete(this.props.id);
     }
 
+    updateHandler(event) {
+        event.persist();
+        event.preventDefault();
+        axios({
+            method: 'post',
+            url:'http://localhost:8000/api/task-update/'+`${this.props.id}`,
+            data: this.state.task,
+            xsrfHeaderName: this.props.CSRFToken
+        })
+        this.setState(state => {
+            return {
+                ...state, editing: false
+            }
+        })
+        this.props.taskUpdater(this.state.task.title, this.props.id);
+    }
+
+    changeHandler(event) {
+        event.persist();
+        this.setState(state => {
+            return {
+                ...state, task: {
+                    ...state.task, title: event.target.value
+                }
+            }
+        })
+    }
 
     render() {
+        let editing = this.state.editing;
 
-        return(
+        const updateForm = (
+            <div className="updateForm">
+                <form onSubmit={this.updateHandler.bind(this)}>
+                    <input 
+                    onChange={this.changeHandler.bind(this)}
+                    value={this.state.title}
+                    />
+                    <button>Save</button>
+                </form>
+                
+            </div>
+        );
+
+        const item = (
             <div className="Task">
                 <p className="mt-2">
                     {this.props.title}
@@ -58,6 +103,11 @@ class List extends Component {
                     </svg>
                 </div>
             </div>
+        );
+
+        return(<div>
+            { editing == true ?  updateForm : item }
+        </div>            
         )
 
     }

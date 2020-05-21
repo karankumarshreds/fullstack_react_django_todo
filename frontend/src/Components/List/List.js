@@ -14,8 +14,12 @@ class List extends Component {
     }
 
     EditHandler = (event) => {
-        alert('Edit?')
-        this.setState({editing: true})
+        // this.setState({editing: true})
+        this.setState(state => {
+            return {
+                ...state, editing: !state.editing
+            }
+        })
     }
 
     DeleteHandler = (event) => {
@@ -31,6 +35,7 @@ class List extends Component {
     updateHandler(event) {
         event.persist();
         event.preventDefault();
+        console.log(this.props.id)
         axios({
             method: 'post',
             url:'http://localhost:8000/api/task-update/'+`${this.props.id}`,
@@ -39,10 +44,26 @@ class List extends Component {
         })
         this.setState(state => {
             return {
-                ...state, editing: false
+                ...state, editing: !this.state.editing
             }
         })
         this.props.taskUpdater(this.state.task.title, this.props.id);
+    }
+
+    checkForChange(event) {
+        event.persist();
+        event.preventDefault();
+        if(event.target.value !== this.state.task.title){
+            //if there's a change in title while updating
+            this.updateHandler(event);
+        } 
+        //if there's no change
+        event.target.value = this.state.task.title;
+        this.setState(state => {
+            return {
+                ...state, editing: !this.state.editing
+            }
+        })
     }
 
     changeHandler(event) {
@@ -60,13 +81,17 @@ class List extends Component {
         let editing = this.state.editing;
 
         const updateForm = (
-            <div className="updateForm">
-                <form onSubmit={this.updateHandler.bind(this)}>
+            <div className="updateFormContainer">
+                <form 
+                // onSubmit={this.updateHandler.bind(this)}
+                onSubmit={this.checkForChange.bind(this)}
+                className="updateForm"
+                >
                     <input 
                     onChange={this.changeHandler.bind(this)}
-                    value={this.state.title}
+                    defaultValue={this.props.title}
                     />
-                    <button>Save</button>
+                    <button className="btn ">Save</button>
                 </form>
                 
             </div>
@@ -74,7 +99,7 @@ class List extends Component {
 
         const item = (
             <div className="Task">
-                <p className="mt-2">
+                <p className="mt-2 taskTitle">
                     {this.props.title}
                 </p>
 

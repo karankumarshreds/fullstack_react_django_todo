@@ -1,12 +1,13 @@
 .Main {
+  
     justify-content: center;
-    margin: 2rem;
+    margin: 5rem 2rem;
   }
   @media (min-width: 600px){
     .container {
       /* margin: 2rem; */
-      width: 580px;
-      background-image: linear-gradient(90deg, steelblue,steelblue, rgb(89, 169, 201),  rgb(11, 132, 148) );
+      width: 650px;
+      background-color: rgb(81, 171, 245);
       padding: 2rem;
       box-shadow:  7px 10px 12px -5px rgba(0,0,0,0.56);
     }
@@ -16,13 +17,35 @@
     .container {
       /* margin: 2rem; */
       width: 100%;
-      background-image: linear-gradient(90deg, steelblue,steelblue, rgb(89, 169, 201),  rgb(11, 132, 148) );
+      background-color: rgb(81, 171, 245);
       padding: 2rem;
       box-shadow:  7px 10px 12px -5px rgba(0,0,0,0.56);
     }
   }
   
+  .Main button {
+    background-color: rgb(253, 112, 166);
+    border: none;
+    box-shadow:  3px 5px 6px -5px rgba(0,0,0,0.56);
+    color: white;
+    font-weight: 600;
+    border-radius: 1rem;
+  }
+  .Main button:hover {
+    background-color: rgb(255, 160, 196);
+    border: none;
+  }
+
+  .titleMain{
+    color: white;
+  }
+ .sub {
+    color: white;
+    font-style: italic;
+    padding-left: 0.2rem;
   
-  
-  
+  }  
+  .createMain {
+    margin-top: 5rem;
+  }
   

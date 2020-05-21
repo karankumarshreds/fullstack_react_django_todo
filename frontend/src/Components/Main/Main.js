@@ -73,7 +73,10 @@ class Main extends Component {
         return (
             <div className="Main">
                 <div className='container'> 
+                <h1 className="titleMain" >TODO APP </h1>
+                <p className="sub">make sure you don't miss a thing...</p>
                         <Create
+                            className="createMain"
                             data={this.state.tasks}
                             CSRFToken={CSRFToken}
                             updateState={this.stateHandler}

@@ -13,23 +13,33 @@ class Create extends Component {
     }
 
 
-    componentDidMount() {
-        this.props.data.push(this.state.task);
-    }
+    // componentDidMount() {
+    //     this.props.data.push(this.state.task);
+    // }
 
     CreateHandler = (event) => {
         event.preventDefault();
-        axios({
-            method:'post',
-            url:'http://localhost:8000/api/task-create',
-            data: this.state.task,
-            xsrfHeaderName: this.props.CSRFToken
-        })
-        .then((res) => {
-            console.log(res.data);
-        })
-        this.props.updateState(this.state.task)
-        event.target.value = '';
+        if(this.state.task.title){
+            axios({
+                method:'post',
+                url:'http://localhost:8000/api/task-create',
+                data: this.state.task,
+                xsrfHeaderName: this.props.CSRFToken
+            })
+            .then((res) => {
+                console.log(res.data);
+            })
+            this.props.updateState(this.state.task)
+            this.setState(state => {
+                return {
+                    task: {
+                        ...state.task, title: ''
+                    }
+                }
+            })
+        } else {
+            alert(`Empty string can't be passed`);
+        }     
     }
 
     ChangeHandler = (event) => {
@@ -51,7 +61,7 @@ class Create extends Component {
                     />
                     <button 
                         type="submit" 
-                        class="saveButton btn btn-primary btn-warning">
+                        class="saveButton btn ">
                             submit
                     </button>
                 </div>

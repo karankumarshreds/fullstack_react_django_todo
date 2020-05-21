@@ -1,5 +1,5 @@
 .Task {
-    background-color: rgb(255, 196, 0);
+    background-color: rgb(253, 112, 166);
     padding: 0rem 0.8rem;
     box-shadow:  3px 5px 6px -5px rgba(0,0,0,0.56);
     display: flex;
@@ -7,13 +7,39 @@
     align-items: center;
     font-weight: 500;
     border-radius: 1rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .Icons {
     cursor: pointer;
-    color: steelblue;
+    color: white;
     display: flex;
     justify-content: space-evenly;
     width: 50px;
+}
+
+.bi-pencil-square:hover{
+    color: teal;
+}
+.bi-x-square:hover{
+    color: teal;
+}
+
+.updateForm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* width: inherit; */
+}
+.updateForm input {
+    width: 80%;
+    margin-right: 5px;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    color: rgb(66, 130, 239);
+}
+
+.updateForm button {
+    margin-top: 1rem;
 }
